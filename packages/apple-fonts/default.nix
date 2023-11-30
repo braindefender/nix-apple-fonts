@@ -21,6 +21,5 @@ stdenv.mkDerivation {
       and in a wide range of languages across multiple interfaces.
     '';
     platforms = platforms.all;
-    license = licenses.unfree;
   };
 }
