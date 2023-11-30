@@ -1,16 +1,17 @@
-{ lib, inputs, pkgs, stdenv }:
-stdenv.mkDerivation {
+{ lib, inputs, pkgs, stdenvNoCC }:
+stdenvNoCC.mkDerivation {
   pname = "apple-fonts";
   version = "1.0";
 
+  dontBuild = true;
   dontUnpack = true;
-  sourceRoot = ".";
+  src = ./.;
 
   # read install --help to find -Dm644 meaning
   installPhase = ''
     runHook preInstall
     mkdir -p $out/usr/share/fonts/opentype
-    for folder in ./fonts/*; do
+    for folder in $src/fonts/*; do
         install -Dm644 "$folder"/*.otf -t $out/usr/share/fonts/opentype
     done
     runHook postInstall

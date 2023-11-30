@@ -18,6 +18,8 @@
 
     src = ./.;
 
+    alias.packages.default = "apple-fonts";
+
     snowfall = {
       namespace = "plusultra";
 
