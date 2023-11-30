@@ -2,13 +2,16 @@
 stdenv.mkDerivation {
   pname = "apple-fonts";
   version = "1.0";
+
   dontUnpack = true;
+  sourceRoot = ".";
 
   # read install --help to find -Dm644 meaning
   installPhase = ''
     runHook preInstall
+    mkdir -p $out/usr/share/fonts/opentype
     for folder in ./fonts/*; do
-        install -Dm644 "$folder"/*.otf -t $out/share/fonts/opentype
+        install -Dm644 "$folder"/*.otf -t $out/usr/share/fonts/opentype
     done
     runHook postInstall
   '';
