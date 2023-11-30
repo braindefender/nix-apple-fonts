@@ -2,6 +2,7 @@
 stdenv.mkDerivation {
   pname = "apple-fonts";
   version = "1.0";
+  dontUnpack = true;
 
   # read install --help to find -Dm644 meaning
   installPhase = ''
