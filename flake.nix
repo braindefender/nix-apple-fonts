@@ -19,6 +19,8 @@
     src = ./.;
 
     snowfall = {
+      namespace = "plusultra";
+
       meta = {
         name = "nix-apple-fonts";
         title = "Nix Apple Fonts";
