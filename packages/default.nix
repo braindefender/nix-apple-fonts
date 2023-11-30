@@ -6,7 +6,9 @@ stdenv.mkDerivation {
   # read install --help to find -Dm644 meaning
   installPhase = ''
     runHook preInstall
-    install -Dm644 "fonts/**/*.otf" -t $out/share/fonts/opentype
+    for folder in ./fonts/*; do
+        install -Dm644 "$folder"/*.otf -t $out/share/fonts/opentype
+    done
     runHook postInstall
   '';
 
@@ -19,5 +21,6 @@ stdenv.mkDerivation {
       and in a wide range of languages across multiple interfaces.
     '';
     platforms = platforms.all;
+    license = licenses.unfree;
   };
 }
