@@ -1,22 +1,22 @@
-{ lib, inputs, pkgs, stdenvNoCC, xorg }:
+{ lib, stdenvNoCC, mkfontdir, mkfontscale }:
 stdenvNoCC.mkDerivation {
   pname = "apple-fonts";
-  version = "1.0";
+  version = "1.1";
 
   dontBuild = true;
   dontUnpack = true;
   src = ./.;
 
-  nativeBuildInputs = [ xorg.mkfontscale ];
+  nativeBuildInputs = [ mkfontscale mkfontdir ];
 
   # read install --help to find -Dm644 meaning
   installPhase = ''
     runHook preInstall
-    mkdir -p $out/usr/share/fonts/opentype
-    for folder in $src/fonts/*; do
-        install -Dm644 "$folder"/*.otf -t $out/usr/share/fonts/opentype
-    done
-    mkfontdir "$out/usr/share/fonts/opentype"
+    mkdir -p $out/share/fonts/opentype
+    find "$src/fonts" -name '*.otf' -exec install -Dm644 -t "$out/share/fonts/opentype" {} +
+    find "$src/fonts" -name '*.ttf' -exec install -Dm644 -t "$out/share/fonts/truetype" {} +
+    mkfontdir "$out/share/fonts/opentype"
+    mkfontdir "$out/share/fonts/truetype"
     runHook postInstall
   '';
 
